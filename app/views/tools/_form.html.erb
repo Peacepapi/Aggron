@@ -1,0 +1,12 @@
+<%= render 'shared/errors', obj: @tool %>
+<div>
+	<%= form_for @tool do |f| %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		<br>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+
+		<%= f.submit(@tool.new_record? ? 'Create Tool' : 'Edit Tool') %>
+	<% end %>
+</div>

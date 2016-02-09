@@ -26,6 +26,10 @@ default: &default
 development:
   <<: *default
   database: myapp
+  username: myapp
+  password: dbpass
+  host: localhost
+  port: 15432
 
 test:
   <<: *default
