@@ -1,6 +1,6 @@
 class ToolsController < ApplicationController
 	def index
-		@tools = Tool.all
+		@tools = Tool.paginate(page: params[:page], per_page: 9)
 	end
 
 	def show
@@ -27,7 +27,7 @@ class ToolsController < ApplicationController
 
 	def create
 		@tool = Tool.new(tool_params)
-		@tool.user = User.find(2)
+		@tool.user = User.find_by_id(current_user.id)
 
 		if @tool.save
 			flash[:success] = "Your tool was created successfully!"
@@ -41,7 +41,7 @@ class ToolsController < ApplicationController
 	private 
 
 		def tool_params
-			params.require(:tool).permit(:name, :description)
+			params.require(:tool).permit(:name, :description, :tooltype_id)
 		end
 
 end

@@ -1,7 +1,12 @@
-<div> 
-	<% flash.each do |m_type, m| %>
-		<p> 
-			<%= m %><a data-dismiss="alert">&#215;</a>
-		</p>
-	<% end %>
-</div>
+
+	<div class="row text-center"> 
+		<div class="col-md-10 col-md-offset-1">
+			<% flash.each do |m_type, m| %>
+			<div class="alert alert-<%= m_type %>">
+				<%= m %><a class="close" data-dismiss="alert">&#215;</a>
+			</p>
+			<% end %>
+			</div>
+		</div>
+	</div>
+

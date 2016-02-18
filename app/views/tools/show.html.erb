@@ -1,6 +1,7 @@
 <%= render 'shared/page_title', title: @tool.name %>
 
 <h4><%= @tool.name %></h4>
+<p><%= @tool.tooltype.name %></p>
 <p><%= simple_format(@tool.description) %></p>
 <p><%= @tool.user.username %></p>
 <p><%= link_to "Edit", edit_tool_path(@tool) %></p>

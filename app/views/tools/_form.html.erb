@@ -1,12 +1,18 @@
 <%= render 'shared/errors', obj: @tool %>
-<div>
-	<%= form_for @tool do |f| %>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-		<br>
-		<%= f.label :description %>
-		<%= f.text_area :description %>
+	<div class="form-group well">
+		<%= form_for @tool do |f| %>
+			<%= f.label :name %>
+			<%= f.text_field :name, class: "form-control" %>
+			<br>
+			<%= f.label :type %>
+			<%= f.collection_select :tooltype_id, Tooltype.all , :id, :name, include_blank: true %>
+			<br>
+			<%= f.label :description %>
+			<%= f.text_area :description, rows: "10", class: "form-control" %>
 
-		<%= f.submit(@tool.new_record? ? 'Create Tool' : 'Edit Tool') %>
-	<% end %>
-</div>
+			<div class="text-center">
+				<%= f.submit(@tool.new_record? ? 'Create Tool' : 'Edit Tool', class: " btn btn-default")%>
+			</div>
+			
+		<% end %>
+</form>

@@ -1,0 +1,33 @@
+<header>
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-left">
+				<%= link_to "Tooldaloo", root_path, class: "logo" %>
+			</div>
+			<div class="navbar-right">
+				<% if !logged_in? %>
+					<%= link_to 'Log in', login_path ,class: "btn btn-success" %>
+					<%= link_to 'Sign Up', signup_path ,class: "btn btn-default" %>
+				<% else %>
+
+					<ul class="nav-item">
+						<li class="dropdown">
+							<%= link_to '#', class: 'btn btn-default', "data-toggle" => "dropdown" do %>
+								<%= current_user.username %> <b class="caret"></b>
+							<% end %>
+							<ul class="dropdown-menu nav_item">
+								<li><%= link_to "View Profile", ' ' %></li>
+								<li><%= link_to "Edit Profile", ' ' %></li>
+								<li class="divider"></li>
+								<li><%= link_to 'Log out', logout_path, class: "btn btn-default" %></li>
+							</ul>
+						</li>
+					</ul>
+
+				<% end %>
+			</div>
+		</div>
+	</div>
+</header>
+
+
