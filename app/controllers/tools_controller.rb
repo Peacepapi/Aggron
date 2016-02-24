@@ -1,6 +1,7 @@
 class ToolsController < ApplicationController
 	def index
-		@tools = Tool.paginate(page: params[:page], per_page: 9)
+		@tools = Tool.paginate(page: params[:page], per_page: 2)
+		@tooltypes = Tooltype.all
 	end
 
 	def show

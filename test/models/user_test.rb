@@ -1,8 +1,9 @@
 require "test_helper"
 
-class UserTest < ActiveSupport::TestCase
+class UserTest < ActiveSupport:: TestCase
+	
 	def setup
-		@user = User.new(username: "Pier", email: "pier@you.me")
+		@user = User.new(username: "Pier", email: "pier12@you.com")
 	end
 
 	test "User should be valid" do
@@ -42,8 +43,7 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "email validation should accept valid addresses" do
-		#separate each element
-		valid_addresses = %w[user564@eee.com RRR_DS-DS@mail.cp user@example.com first.last@eem.au laura+joe@monk.cm]
+		valid_addresses = %w[sUser564@eele.com RRR_DS-DS@mail.cp user@example.com first.last@eem.au laura+joe@monk.cm]
 		valid_addresses.each do |va|
 			@user.email = va
 			assert @user.valid?, "#{va.inspect} should be valid"

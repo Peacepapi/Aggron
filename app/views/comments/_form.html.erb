@@ -1,0 +1,8 @@
+<%= render 'shared/errors', obj: Comment.new %>
+	<div class="form-group well">
+			<%= form_for [@tool, Comment.new ] do |f| %>
+				<%= f.label :body %>
+				<%= f.text_area :body, rows: "5", class: "form-control" %>
+				<%= f.submit('Post', class: " btn btn-default")%>
+			<% end %>
+	</div>

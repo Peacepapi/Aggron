@@ -3,18 +3,35 @@
 <% end %>
 <%= render 'shared/page_title', title: 'All tools' %>
 
+
+<div class="well">
+	<ul>
+		<% @tooltypes.each do |type| %>
+		<li>
+			<%= link_to type.name, tooltype_path(type) %>
+			<% end %>
+		</li>
+	</ul>
+</div>
+
+
+
 <%= will_paginate %>
 
-<% @tools.each do |t| %>
-	<div>
-		<h4><%= link_to t.name, tool_path(t) %></h4>
-		<p>
-			<%= t.description %>
-		</p>
-		<p>
-			<span><%= time_ago_in_words(t.created_at) %></span>
-		</p>
-	</div>
+<% if !@tools %>
+	<p>There are no tools listed</p>
+<% else %>
+	<% @tools.each do |t| %>
+		<div class="well">
+			<h4><%= link_to t.name, tool_path(t) %></h4>
+			<p>
+				<%= t.description %>
+			</p>
+			<p>
+				<span><%= time_ago_in_words(t.created_at) %></span>
+			</p>
+		</div>
+	<% end %>
 <% end %>
 
 <%= will_paginate %>

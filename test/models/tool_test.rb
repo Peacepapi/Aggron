@@ -11,6 +11,11 @@ class ToolTest < ActiveSupport:: TestCase
 		assert_not @tool.valid?
 	end
 
+	test "tooltype should be present" do
+		@tool.tooltype_id = nil
+		assert_not @tool.valid?
+	end
+
 	test "name should be present" do
 		@tool.name = " "
 		assert_not @tool.valid?

@@ -1,8 +1,14 @@
 <%= render 'shared/page_title', title: @tool.name %>
 
-<h4><%= @tool.name %></h4>
-<p><%= @tool.tooltype.name %></p>
-<p><%= simple_format(@tool.description) %></p>
-<p><%= @tool.user.username %></p>
-<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
+<h4>Name: <%= @tool.name %></h4>
+<p>Type: <%= link_to @tool.tooltype.name , tooltype_path(@tool.tooltype) %></p>
+<p>Description: <%= simple_format(@tool.description) %></p>
+<p>Owner: <%= link_to @tool.user.username , user_path(@tool.user) %></p>
+<% if current_user && @tool.user_id == current_user.id %>
+	<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
+<% else %>
+
+<% end %>
 <p><%= link_to "Back to Tools", tools_path %></p>
+<%= render @tool.comments %>
+<%= render 'comments/form' %>

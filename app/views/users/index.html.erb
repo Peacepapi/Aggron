@@ -1,0 +1,16 @@
+<%= render 'shared/page_title', title: 'All Users' %>
+
+<%= will_paginate %>
+
+<% if !@users %>
+	<p>There are no users listed</p>
+<% else %>
+	<% @users.each do |user| %>
+		<div class="well">
+			<h4><%= link_to user.username, user_path(user) %></h4>
+
+		</div>
+	<% end %>
+<% end %>
+
+<%= will_paginate %>

@@ -1,9 +1,17 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+/*------------------------Global---------------------------*/
 
 body {
 	padding-top: 80px;
 }
+
+.btn-default {
+	color: #fff;
+    background-color: #d44745;
+}
+
+/*------------------------Navigation---------------------------*/
 .navbar-left {
 	padding-top: 10px;
 }
@@ -13,23 +21,16 @@ div.navbar-right {
 	margin-right: 15px
 }
 
-
 .navbar {
 	border-bottom: 1px solid #eaeaea;
 }
+
 a.logo {
+	text-decoration: none;
 	font-size: 1.5em;
 	color: #000;
 }
-.footer {
-	margin-top: 25px;
-	border-top: 1px solid #eaeaea;
-	color: #777;
-}
-.btn-default {
-	color: #fff;
-    background-color: #d44745;
-}
+
 .title {
 	color: #fff;
 	background-color: #d44745;
@@ -39,3 +40,41 @@ a.logo {
 ul.nav-item {
 	list-style-type: none;
 }
+/*----------------------Banner-----------------------*/
+.wrapper {
+	height: 600px;
+
+}
+#banner {
+	text-align: center;
+	height: 90%;
+	background-image: url("/assets/banner-background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/*----------------------Footer-----------------------*/
+.footer {
+	background-color: #f8f8f8;
+	margin-top: 25px;
+	border-top: 1px solid #eaeaea;
+	color: #777;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

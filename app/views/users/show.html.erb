@@ -1,0 +1,20 @@
+<%= render 'shared/page_title', title: @user.username %>
+
+<h4><%= @user.username %></h4>
+
+<div class="center">
+	<%= will_paginate @tools %>
+</div>
+
+<% @tools.each do |t| %>
+	<div class="well">
+			<h4><%= link_to t.name, tool_path(t) %></h4>
+		<p>
+			<%= t.description %>
+		</p>
+		<p>
+			<span>Created: <%= time_ago_in_words(t.created_at) %></span>
+			<span>Updated: <%= time_ago_in_words(t.updated_at) %></span>
+		</p>
+	</div>
+<% end %>

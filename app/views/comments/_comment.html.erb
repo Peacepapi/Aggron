@@ -1,0 +1,9 @@
+<p>
+	<strong>Commenter: </strong><%= comment.user.username %>
+		<br>
+	<%= comment.body %>
+</p>
+
+<p>
+	<span><%= time_ago_in_words(comment.created_at) %></span>
+</p>

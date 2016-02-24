@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+
   root 'pages#home'
 
-  resources :tools
+  resources :tools do
+  	resources :comments
+  end
+
+  resources :tooltypes, only: [:show]
 
   resources :users, except: [:new]
   get '/signup', to: 'users#new'
