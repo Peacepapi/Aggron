@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+	#before_action perform methods before all actions(methods) 
+before_action :set_user, only: [:edit, :update, :show]
+before_action :require_same_user, only: [:edit, :update]
 
 	def index
 		@users = User.paginate(page: params[:page], per_page: 2)
@@ -20,19 +23,16 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find_by_id(params[:id])
 		@tools = @user.tools.paginate(page: params[:page], per_page: 2)
 	end
 
 	def edit
-		@user = User.find_by_id(params[:id])
 	end
 
 	def update
-		@user = User.find_by_id(params[:id])
 		if @user.update(user_params)
 			flash[:success] = "Your profile has been updated successfully"
-			redirect_to tools_path
+			redirect_to user_path(@user)
 		else
 			flash[:warning] = "Invalid entries"
 			render 'edit'
@@ -43,6 +43,18 @@ class UsersController < ApplicationController
 
 		def user_params
 			params.require(:user).permit(:username, :email, :password)
+		end
+
+		def set_user
+			@user = User.find_by_id(params[:id])
+		end
+
+
+		def require_same_user
+			if current_user != @user
+				flash[:danger] = "You cannot edit another user's information"
+				redirect_to root_path
+			end
 		end
 
 end

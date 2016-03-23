@@ -1,9 +1,11 @@
-<p>
-	<strong>Commenter: </strong><%= comment.user.username %>
+<div class= "well">
+	<p>
+		<strong>Commenter: </strong><%= link_to comment.user.username, user_path(comment.user) %>
 		<br>
-	<%= comment.body %>
-</p>
+		<%= comment.body %>
+	</p>
 
-<p>
-	<span><%= time_ago_in_words(comment.created_at) %></span>
-</p>
+	<p>
+		<span><%= time_ago_in_words(comment.created_at) %></span>
+	</p>
+</div>

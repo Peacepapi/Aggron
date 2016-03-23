@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
 		if @comment.save
 			flash[:success] = "Thank you for your comments!"
 			redirect_to tool_path(@tool)
+
 		else
 			flash[:warning] = "Your entries was invalid!"
 			redirect_to tool_path(@tool)

@@ -1,11 +1,13 @@
 class ToolsController < ApplicationController
+before_action :set_tool, only: [:edit, :update, :show]
+before_action :require_user, except: [:index, :show, :update]
+before_action :require_same_user, only: [:edit, :update] 	
 	def index
 		@tools = Tool.paginate(page: params[:page], per_page: 2)
 		@tooltypes = Tooltype.all
 	end
 
 	def show
-		@tool = Tool.find(params[:id])
 	end
 
 	def new
@@ -13,11 +15,9 @@ class ToolsController < ApplicationController
 	end
 
 	def edit
-		@tool = Tool.find(params[:id])
 	end
 
 	def update
-		@tool = Tool.find(params[:id])
 		if @tool.update(tool_params)
 			flash[:success] = "Your tool was edited successfully!"
 			redirect_to tool_path(@tool)
@@ -28,7 +28,7 @@ class ToolsController < ApplicationController
 
 	def create
 		@tool = Tool.new(tool_params)
-		@tool.user = User.find_by_id(current_user.id)
+		@tool.user = current_user
 
 		if @tool.save
 			flash[:success] = "Your tool was created successfully!"
@@ -43,6 +43,17 @@ class ToolsController < ApplicationController
 
 		def tool_params
 			params.require(:tool).permit(:name, :description, :tooltype_id)
+		end
+
+		def set_tool
+			@tool = Tool.find(params[:id])
+		end
+
+		def require_same_user
+			if current_user != @tool.user
+				flash[:danger] = "You cannot edit another user's tool"
+				redirect_to root_path
+			end
 		end
 
 end

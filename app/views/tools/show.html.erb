@@ -4,11 +4,16 @@
 <p>Type: <%= link_to @tool.tooltype.name , tooltype_path(@tool.tooltype) %></p>
 <p>Description: <%= simple_format(@tool.description) %></p>
 <p>Owner: <%= link_to @tool.user.username , user_path(@tool.user) %></p>
-<% if current_user && @tool.user_id == current_user.id %>
+<% if current_user && @tool.user_id == current_user %>
 	<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
 <% else %>
 
 <% end %>
 <p><%= link_to "Back to Tools", tools_path %></p>
-<%= render @tool.comments %>
-<%= render 'comments/form' %>
+<% if !logged_in? %>
+	<p>Please log in to enter a comment</p>
+<% else %>
+	<%= render 'comments/form' %>
+<% end %>
+
+<%= render @tool.comments.order("created_at desc") %>
