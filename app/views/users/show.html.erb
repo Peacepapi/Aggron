@@ -5,7 +5,6 @@
 <div class="center">
 	<%= will_paginate @tools %>
 </div>
-
 <% @tools.each do |t| %>
 	<div class="well">
 			<h4><%= link_to t.name, tool_path(t) %></h4>
@@ -17,4 +16,20 @@
 			<span>Updated: <%= time_ago_in_words(t.updated_at) %></span>
 		</p>
 	</div>
+<% end %>
+
+<h4>Tools User have requested!</h4>
+<% @tools.each do |t| %>
+	<% if t.borrowRequests.present? %>
+		<p><%= t.name %></p>
+		<% t.borrowRequests.each do |req| %>
+			<p><%= req.requester.username %></p>
+		<% end %>
+	<% end %>
+<% end %>
+
+<h4>Tools You have requested!</h4>
+<% @user.borrowRequests.each do |b| %>
+	<%= b.requestedTool.name %>
+	<%= b.requestedTool.owner.username %>
 <% end %>

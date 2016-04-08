@@ -11,16 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218205326) do
+ActiveRecord::Schema.define(version: 20160408033252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "borrow_requests", force: :cascade do |t|
+    t.integer  "requester_id"
+    t.integer  "requestedTool_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "commenter_id"
     t.integer  "tool_id"
   end
 
@@ -29,14 +36,15 @@ ActiveRecord::Schema.define(version: 20160218205326) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.integer  "tooltype_id"
+    t.integer  "borrower_id"
   end
 
   create_table "tooltypes", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
   create_table "users", force: :cascade do |t|

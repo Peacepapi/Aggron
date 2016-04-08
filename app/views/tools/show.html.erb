@@ -3,8 +3,8 @@
 <h4>Name: <%= @tool.name %></h4>
 <p>Type: <%= link_to @tool.tooltype.name , tooltype_path(@tool.tooltype) %></p>
 <p>Description: <%= simple_format(@tool.description) %></p>
-<p>Owner: <%= link_to @tool.user.username , user_path(@tool.user) %></p>
-<% if current_user && @tool.user_id == current_user %>
+<p>Owner: <%= link_to @tool.owner.username , user_path(@tool.owner) %></p>
+<% if current_user && @tool.owner == current_user %>
 	<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
 <% else %>
 
@@ -14,6 +14,7 @@
 	<p>Please log in to enter a comment</p>
 <% else %>
 	<%= render 'comments/form' %>
+	<%= render 'borrow_requests/create' %>
 <% end %>
 
 <%= render @tool.comments.order("created_at desc") %>

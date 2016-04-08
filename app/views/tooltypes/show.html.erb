@@ -1,7 +1,5 @@
 <h4><%= @tooltype.name %></h4>
 
-<%= will_paginate @tools %>
-
 <% @tools.each do |t| %>
 	<div class="well">
 		<p><%=link_to t.name, tool_path(t) %></p>

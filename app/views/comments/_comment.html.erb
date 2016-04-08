@@ -1,6 +1,6 @@
 <div class= "well">
 	<p>
-		<strong>Commenter: </strong><%= link_to comment.user.username, user_path(comment.user) %>
+		<strong>Commenter: </strong><%= link_to comment.commenter.username, user_path(comment.commenter) %>
 		<br>
 		<%= comment.body %>
 	</p>

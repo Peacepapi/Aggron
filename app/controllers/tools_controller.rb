@@ -2,6 +2,7 @@ class ToolsController < ApplicationController
 before_action :set_tool, only: [:edit, :update, :show]
 before_action :require_user, except: [:index, :show, :update]
 before_action :require_same_user, only: [:edit, :update] 	
+
 	def index
 		@tools = Tool.paginate(page: params[:page], per_page: 2)
 		@tooltypes = Tooltype.all

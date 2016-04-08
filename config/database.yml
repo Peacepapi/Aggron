@@ -18,22 +18,22 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: myapp
-  password: dbpass
+  username: postgres
+  password: thenigga
   host: localhost
-  port: 15432
+  port: 54321
 
 development:
   <<: *default
-  database: myapp
-  username: myapp
-  password: dbpass
+  database: Aggron
+  username: postgres
+  password: thenigga
   host: localhost
-  port: 15432
+  port: 54321
 
 test:
   <<: *default
-  database: myapp
+  database: Aggron
 # Instead, provide the password as a unix environment variable when you boot
 # the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full rundown on how to provide these environment variables in a
@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
-  database: myapp
-  username: myapp
-  password: dbpass
+  database: Aggron
+  username: postgres
+  password: thenigga
+  

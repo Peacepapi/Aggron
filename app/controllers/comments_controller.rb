@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 		@tool = Tool.find(params[:tool_id])
 
 		@comment = @tool.comments.create(comment_params)
-		@comment.user = User.find_by_id(current_user.id)
+		@comment.user = User.find_by_id(current_user)
 
 		if @comment.save
 			flash[:success] = "Thank you for your comments!"

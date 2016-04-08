@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   resources :tools do
   	resources :comments
+    resources :borrow_requests, only: [:index, :new, :create, :show]
   end
-  
+
   resources :tooltypes, only: [:show]
 
   resources :users, except: [:new]
