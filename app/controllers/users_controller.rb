@@ -46,7 +46,7 @@ before_action :require_same_user, only: [:edit, :update]
 		end
 
 		def set_user
-			@user = User.find_by_id(params[:id])
+			@user = User.find(params[:id])
 		end
 
 

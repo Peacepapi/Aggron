@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408033252) do
+ActiveRecord::Schema.define(version: 20160418022821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160408033252) do
     t.integer  "owner_id"
     t.integer  "tooltype_id"
     t.integer  "borrower_id"
+    t.boolean  "requestReturn", default: false
   end
 
   create_table "tooltypes", force: :cascade do |t|

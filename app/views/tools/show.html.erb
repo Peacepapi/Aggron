@@ -10,11 +10,23 @@
 
 <% end %>
 <p><%= link_to "Back to Tools", tools_path %></p>
+
+
 <% if !logged_in? %>
-	<p>Please log in to enter a comment</p>
+	<p>Please log in to enter a comment or borrow a tool</p>
 <% else %>
 	<%= render 'comments/form' %>
-	<%= render 'borrow_requests/create' %>
+
+	<% if @tool.borrower != nil %>
+			<p>This tool is unavailable</p>
+	<% elsif @tool.borrowRequests.each do |req| %>
+		<% if req.requester == current_user %>
+			<p>Your request is pending...</p>
+		<% end %>
+	<% end %>
+	<% else %>
+		<%= render 'borrow_requests/create' %>
+	<% end %>
 <% end %>
 
 <%= render @tool.comments.order("created_at desc") %>

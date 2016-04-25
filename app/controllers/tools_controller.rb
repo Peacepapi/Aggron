@@ -29,7 +29,7 @@ before_action :require_same_user, only: [:edit, :update]
 
 	def create
 		@tool = Tool.new(tool_params)
-		@tool.user = current_user
+		@tool.owner = current_user
 
 		if @tool.save
 			flash[:success] = "Your tool was created successfully!"
@@ -51,7 +51,7 @@ before_action :require_same_user, only: [:edit, :update]
 		end
 
 		def require_same_user
-			if current_user != @tool.user
+			if current_user != @tool.owner
 				flash[:danger] = "You cannot edit another user's tool"
 				redirect_to root_path
 			end
