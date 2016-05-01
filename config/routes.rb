@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'messages/index'
+
+  get 'messages/new'
+
+  get 'messages/create'
+
   root 'pages#home'
+
+  namespace :api do
+    resources :tools
+  end
+
 
   resources :tools do
   	resources :comments
@@ -15,6 +26,12 @@ Rails.application.routes.draw do
     post '/return_request/:tool_id', to: 'borrow_requests#requestReturn', as: 'requestReturn'
     post '/return_tool/:tool_id', to: 'borrow_requests#acceptReturn', as: 'return'
   end
+
+  resources :conversations, only: [:create, :index] do
+    resources :messages
+  end
+
+
   get '/signup', to: 'users#new'
 
   get '/login', to: 'logins#new'

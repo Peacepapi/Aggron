@@ -1,0 +1,28 @@
+<h4>Message Box</h4>
+<div class="item">
+  <% @conversations.each do |conversation| %>
+  <!-- if user have a conversation as sender or recipient-->
+    <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+    <!-- if as sender get recipient name-->
+      <% if conversation.sender_id == current_user.id %>
+        <% recipient = User.find(conversation.recipient_id) %>
+      <% else %>
+    <!-- else, if as recipient get sender name-->
+        <% recipient = User.find(conversation.sender_id) %>
+      <% end %>
+      <%= recipient.username %> <%= link_to 'Send a message', conversation_messages_path(conversation)%>
+    <% end %>
+  <% end %>
+</div>
+
+
+<h4>All User</h4>
+<div>
+  <% @users.each do |user| %>
+    <% if user.id != current_user.id %>
+      <p>
+        <%= user.username %> <%= link_to 'Send a message', conversations_path(sender_id: current_user.id,recipient_id: user.id), method: 'POST' %>
+      </p>
+    <% end %>
+  <% end %>
+</div>

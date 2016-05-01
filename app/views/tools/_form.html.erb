@@ -1,6 +1,6 @@
 <%= render 'shared/errors', obj: @tool %>
 	<div class="form-group well">
-		<%= form_for @tool, remote: true do |f| %>
+		<%= form_for @tool do |f| %>
 			<%= f.label :name %>
 			<%= f.text_field :name, class: "form-control" %>
 			<br>

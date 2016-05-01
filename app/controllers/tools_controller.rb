@@ -35,7 +35,6 @@ before_action :require_same_user, only: [:edit, :update]
 			flash[:success] = "Your tool was created successfully!"
 			redirect_to tools_path
 		else 
-			flash[:warning] = "Your entries was invalid!"
 			render :new
 		end
 	end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	#before_action perform methods before all actions(methods) 
+	#before_action perform methods before all actions(methods), 'only' specify the actions
 before_action :set_user, only: [:edit, :update, :show]
 before_action :require_same_user, only: [:edit, :update]
 
@@ -39,7 +39,7 @@ before_action :require_same_user, only: [:edit, :update]
 		end
 	end
 
-	private
+private
 
 		def user_params
 			params.require(:user).permit(:username, :email, :password)
