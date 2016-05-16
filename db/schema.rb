@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501190957) do
+ActiveRecord::Schema.define(version: 20160514163937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,11 @@ ActiveRecord::Schema.define(version: 20160501190957) do
     t.integer  "owner_id"
     t.integer  "tooltype_id"
     t.integer  "borrower_id"
-    t.boolean  "requestReturn", default: false
+    t.boolean  "requestReturn",         default: false
+    t.string   "tool_pic_file_name"
+    t.string   "tool_pic_content_type"
+    t.integer  "tool_pic_file_size"
+    t.datetime "tool_pic_updated_at"
   end
 
   create_table "tooltypes", force: :cascade do |t|
@@ -69,6 +73,11 @@ ActiveRecord::Schema.define(version: 20160501190957) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
+    t.string   "profile_pic_file_name"
+    t.string   "profile_pic_content_type"
+    t.integer  "profile_pic_file_size"
+    t.datetime "profile_pic_updated_at"
+    t.string   "password_confirmation"
   end
 
 end

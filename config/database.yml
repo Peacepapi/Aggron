@@ -19,7 +19,7 @@ default: &default
   encoding: unicode
   pool: 5
   username: postgres
-  password: thenigga
+  password: peacepapi
   host: localhost
   port: 54321
 
@@ -27,7 +27,7 @@ development:
   <<: *default
   database: Aggron
   username: postgres
-  password: thenigga
+  password: peacepapi
   host: localhost
   port: 54321
 
@@ -52,5 +52,5 @@ production:
   <<: *default
   database: Aggron
   username: postgres
-  password: thenigga
+  password: peacepapi
   

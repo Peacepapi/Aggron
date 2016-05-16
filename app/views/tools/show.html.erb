@@ -1,32 +1,60 @@
-<%= render 'shared/page_title', title: @tool.name %>
+<div class="container">
+		<!-- Heading Row -->
+	<div class="row">
+		<div class="col-md-12">
+			<%= link_to "Home", tools_path %>
+			<span class="glyphicon glyphicon-menu-right"></span>
+			<%= link_to @tool.tooltype.name, tooltype_path(@tool.tooltype) %>
+			<span class="glyphicon glyphicon-menu-right"></span>
 
-<h4>Name: <%= @tool.name %></h4>
-<p>Type: <%= link_to @tool.tooltype.name , tooltype_path(@tool.tooltype) %></p>
-<p>Description: <%= simple_format(@tool.description) %></p>
-<p>Owner: <%= link_to @tool.owner.username , user_path(@tool.owner) %></p>
-<% if current_user && @tool.owner == current_user %>
-	<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
-<% else %>
+		</div>
+		<div class="col-md-6">
+		    <div class="thumbnail">
+	            <%= image_tag(@tool.tool_pic.url(:large), size: '533x400', class: 'img responsive')%>
+			</div>   
+		</div>  
+		<div class="col-md-6">
+	        <p>Owner: <%= link_to @tool.owner.display_name , user_path(@tool.owner) %></p>
+	        <p class="text-center"><%= image_tag @tool.owner.profile_pic.url(:medium), class: "img-circle" %></p>
+	    	<h4><%= @tool.name %></h4>
+			<p>Type: <%= link_to @tool.tooltype.name , tooltype_path(@tool.tooltype) %></p>
+			<p>Description: <br><%= @tool.description %></p> 
+		    <div class="ratings">
+		        <% if current_user && @tool.owner == current_user %>
+					<p><%= link_to "Edit", edit_tool_path(@tool) %></p>
+				<% end %>
+		    </div>
 
-<% end %>
-<p><%= link_to "Back to Tools", tools_path %></p>
+			<div class="caption-full">
+			    <h4>
+					<% if @tool.borrower != nil %>
+							<p>This tool is unavailable</p>
+					<% elsif  @tool.owner == current_user %>
+							<p>You are the owner of this tool.</p>
+					<% else %>
+						<% if @tool.borrowRequests.present? %>
+							<% @tool.borrowRequests.each do |req| %>
+								<% if req.requester == current_user %>
+									<p>Your request is pending...</p>
+								<% end %>
+							<% end %>
+						<% else %> 
+							<%= render 'borrow_requests/create' %>
+						<% end %>
+					<% end %>
+			    </h4>
+			</div>
 
+		</div>
 
-<% if !logged_in? %>
-	<p>Please log in to enter a comment or borrow a tool</p>
-<% else %>
-	<%= render 'comments/form' %>
-
-	<% if @tool.borrower != nil %>
-			<p>This tool is unavailable</p>
-	<% elsif @tool.borrowRequests.each do |req| %>
-		<% if req.requester == current_user %>
-			<p>Your request is pending...</p>
+	</div>
+	<div id="comments">
+		<% if !logged_in? %>
+			<p>Please log in to enter a comment or borrow a tool</p>
+		<% else %>
+		<%= render 'comments/form' %>
 		<% end %>
-	<% end %>
-	<% else %>
-		<%= render 'borrow_requests/create' %>
-	<% end %>
-<% end %>
-
-<%= render @tool.comments.order("created_at desc") %>
+		<%= render @tool.comments.order("created_at desc") %>
+	</div>
+	<!-- /.row -->
+</div>

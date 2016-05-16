@@ -12,6 +12,14 @@ body {
 }
 
 /*------------------------Navigation---------------------------*/
+.navbar {
+	background-color: #E0E3DA;
+}
+
+.navbar-inverse .navbar-brand {
+    color: black;
+}
+
 .navbar-left {
 	padding-top: 10px;
 }
@@ -55,13 +63,13 @@ ul.nav-item {
 
 /*----------------------Footer-----------------------*/
 .footer {
-	background-color: #f8f8f8;
-	margin-top: 25px;
+	margin: 0 0;
+	background-color: #E0E3DA;
 	border-top: 1px solid #eaeaea;
 	color: #777;
+	bottom: 0;
+	width: 100%;
 }
-
-
 
 
 

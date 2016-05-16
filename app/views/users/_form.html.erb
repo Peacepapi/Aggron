@@ -1,16 +1,36 @@
 <%= render 'shared/errors', obj: @user %>
 	<div class="form-group well">
-	<%= form_for @user do |f| %>
-		<%= f.label :username %>
-		<%= f.text_field :username, class: 'form-control' %>
-		<br>
-		<%= f.label :email %>
-		<%= f.email_field :email, class: 'form-control' %>
-		<br>
-		<%= f.label :password %>
-		<%= f.password_field :password, class: 'form-control' %>
-		<div class="text-center">
-			<%= f.submit(@user.new_record? ? 'Register' : 'Edit Profile', class: ' btn btn-default')%>
-		</div>
+	<%= form_for @user, html: { multipart: true } do |f| %>
+		<ul class="form-style-1">
+			<li><%= f.label :profile_pic %>
+				<%= f.file_field :profile_pic %>
+				<% if @user.profile_pic? %>
+					<%= image_tag current_user.profile_pic.url(:medium) %>
+				<% end %>
+			</li>
+			<li>
+				<%= f.label :username %> <span class="required">*</span>
+				<%= f.text_field :username, class: 'form-control' %>
+			</li>
+			<li>
+				<%= f.label :email %> <span class="required">*</span>
+				<%= f.email_field :email, class: 'form-control' %>
+			</li>
+			<li>
+				<%= f.label :password %> <span class="required">*</span>
+				<%= f.password_field :password, class: 'form-control' %>
+			</li>
+			<li>
+				<%= f.label :password_confirmation %> <span class="required">*</span>
+				<%= f.password_field :password_confirmation, class: 'form-control' %>
+			</li>
+			<li>
+				<div class="text-center">
+				<%= f.submit(@user.new_record? ? 'Register' : 'Update Profile', class:'btn btn-default')%>
+				</div>
+			</li>
+		</ul>
 	<% end %>
 </div>
+
+

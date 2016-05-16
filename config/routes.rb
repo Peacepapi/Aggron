@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'messages/index'
-
-  get 'messages/new'
-
-  get 'messages/create'
-
-  root 'pages#home'
+  root 'tools#index'
 
   namespace :api do
     resources :tools
@@ -25,9 +18,10 @@ Rails.application.routes.draw do
     post '/borrow_request/lend/:id', to: 'borrow_requests#lendTool', as: 'lend'
     post '/return_request/:tool_id', to: 'borrow_requests#requestReturn', as: 'requestReturn'
     post '/return_tool/:tool_id', to: 'borrow_requests#acceptReturn', as: 'return'
+    get 'transaction_status'
   end
 
-  resources :conversations, only: [:create, :index] do
+  resources :conversations do
     resources :messages
   end
 

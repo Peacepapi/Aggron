@@ -26,7 +26,7 @@ class BorrowRequestsController < ApplicationController
 		@request = BorrowRequest.find(params[:id])
 		if @request.delete
 			flash[:success] = "You successful rejected a requested from #{@request.requester.username}"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		end
 	end
 
@@ -39,10 +39,10 @@ class BorrowRequestsController < ApplicationController
 
 		if tool.save && @request.delete
 			flash[:success] = "You lended #{tool.name} to #{tool.borrower.username}"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		else
 			flash[:warning] = "false!"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		end
 	end
 
@@ -52,10 +52,10 @@ class BorrowRequestsController < ApplicationController
 
 		if tool.update_attribute(:requestReturn, true)
 			flash[:success] = "You requested for #{tool.name} to be returned to #{tool.owner.username}"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		else
 			flash[:warning] = "error"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		end
 	end
 
@@ -65,10 +65,10 @@ class BorrowRequestsController < ApplicationController
 
 		if tool.update_attributes(:requestReturn => false,:borrower_id => nil)
 			flash[:success] = "You successfully accpeted #{tool.name}"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		else
 			flash[:warning] = "error"
-			redirect_to user_path(user)
+			redirect_to user_transaction_status_path(user)
 		end
 		
 	end

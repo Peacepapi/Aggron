@@ -7,7 +7,6 @@ class ConversationsController < ApplicationController
 	end
 
 	def create
-		binding.pry
 		#if convo with recipient exist, continue. first is for 1 convo instead of making multiple convo with same recipient 
 		if Conversation.with(params[:sender_id], params[:recipient_id]).present?
 			@conversation = Conversation.with(params[:sender_id], params[:recipient_id]).first

@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+html, body {
+	height: 100%;
+}
+body {
+    padding-top: 100px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
+}
+.request-box {
+	margin-top: 15px;
+	background-color: #aacfd0;
+}
+.btn-default {
+	background-color: #79bd9a;
+}
+.title {
+	background-color: #79bd9a;
+}
+.footer{
+	position: relative;
+	clear:both;
+	padding-top:20px;
+}

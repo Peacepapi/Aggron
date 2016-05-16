@@ -13,6 +13,7 @@ before_action :require_same_user, only: [:edit, :update]
 
 	def create
 		@user = User.new(user_params)
+
 		if @user.save
 			flash[:success] = "Your account has been create succesfully"
 			session[:user_id] = @user.id
@@ -39,10 +40,15 @@ before_action :require_same_user, only: [:edit, :update]
 		end
 	end
 
+	def transaction_status
+		@user = User.find(params[:user_id])
+		@tools = @user.tools
+	end
+
 private
 
 		def user_params
-			params.require(:user).permit(:username, :email, :password)
+			params.require(:user).permit(:username, :email, :password, :profile_pic, :password_confirmation)
 		end
 
 		def set_user

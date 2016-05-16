@@ -1,0 +1,83 @@
+<% if @user == current_user %>
+<div class="row transaction-row">
+
+	<div class="col-md-3 transaction-status">
+		<h4>Tools Users are requesting!</h4>
+		<% @tools.each do |t| %>
+			<div class="request-box">
+				<% if t.borrowRequests.present? %>
+					<p><%= link_to t.name, tool_path(t) %></p>
+					<% t.borrowRequests.each do |req| %>
+						<p>Requester: <%= link_to req.requester.username, user_path(req.requester) %></p>
+						<p>
+							<%= render "borrow_requests/rejectTool", :req => req %>
+							<%= render "borrow_requests/lendTool", :req => req %>
+						</p>
+						
+					<% end %>
+				<% end %>
+			</div>
+		<% end %>
+	</div> <!-- Tools ppl requested -->
+
+	<div class="col-md-3 transaction-status">
+		<h4>Tools You have requested!</h4>
+		<% @user.borrowRequests.each do |b| %>
+			<div class="request-box">			
+				<p><%= link_to b.requestedTool.name, tool_path(b.requestedTool) %></p>
+				<p>Owner: <%= link_to b.requestedTool.owner.username, user_path(b.requestedTool.owner) %></p>
+			</div>
+		<% end %>
+	</div> <!-- Tools you requested -->
+
+	<div class="col-md-3 transaction-status">
+		<h4>Tools You have borrowed</h4>
+		<% @user.borrowedTools.each do |t| %>
+			<div class="request-box">
+				<p><%= link_to t.name, tool_path(t)%></p>
+				<p>Owner: <%= link_to t.owner.username, user_path(t.owner) %></p>
+				<% if t.requestReturn == true %>
+					<p><%="Requested a return"%></p>
+				<% else %>
+					<%= render "borrow_requests/requestReturn", :tool => t %>
+				<% end %>
+			</div>		
+		<% end %> <!-- Tools borrowed -->
+	</div>
+
+	<div class="col-md-3">
+		<h4>Tools You have lended</h4>
+		<% @user.tools.each do |t| %>
+			<div class="request-box">
+				<% if t.borrower.present? %>
+					<p><%= link_to t.name, tool_path(t) %></p>
+					<p>Borrower: <%= link_to t.borrower.username, user_path(t.borrower) %></p>
+					<% if t.requestReturn == true %>
+						<%= render 'borrow_requests/acceptReturn', :tool => t %>
+					<% end %>
+				<% end %>
+			</div>
+		<% end %> <!-- Tools lended -->
+	</div>
+</div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

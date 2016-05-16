@@ -1,6 +1,13 @@
 <%= render 'shared/page_title', title: @user.username %>
 
-<h4><%= @user.username %></h4>
+<% if @user.profile_pic? %>
+	<%= image_tag @user.profile_pic.url(:medium) %>
+<% end %>
+
+<% if logged_in? && @user == current_user %>
+	<h2><%= link_to "Create a new tool", new_tool_path %></h2>
+<% end %>
+
 
 <div class="center">
 	<%= will_paginate @tools %>
@@ -17,66 +24,4 @@
 		</p>
 	</div>
 <% end %>
-
-<% if @user == current_user %>
-
-	<h4>Tools User have requested!</h4>
-	<% @tools.each do |t| %>
-		<% if t.borrowRequests.present? %>
-			<p><%= link_to t.name, tool_path(t) %></p>
-			<% t.borrowRequests.each do |req| %>
-				<p>Requester <%= link_to req.requester.username, user_path(req.requester) %></p>
-				<%= render "borrow_requests/rejectTool", :req => req %>
-				<%= render "borrow_requests/lendTool", :req => req %>
-			<% end %>
-		<% end %>
-	<% end %>
-
-	<h4>Tools You have requested!</h4>
-	<% @user.borrowRequests.each do |b| %>
-		<%= link_to b.requestedTool.name, tool_path(b.requestedTool) %>
-		<%= link_to b.requestedTool.owner.username, user_path(b.requestedTool.owner) %>
-	<% end %>
-
-	<h4>Tools You have borrowed</h4>
-	<% @user.borrowedTools.each do |t| %>
-		<%= link_to t.name, tool_path(t)%>
-		<%= link_to t.owner.username, user_path(t.owner) %>
-		<% if t.requestReturn == true %>
-			<p><%="You have requested to return this tool."%></p>
-		<% else %>
-			<%= render "borrow_requests/requestReturn", :tool => t %>
-		<% end %>
-	<% end %>
-
-	<h4>Tools You have lended</h4>
-	<% @user.tools.each do |t| %>
-		<% if t.borrower.present? %>
-			<%= link_to t.name, tool_path(t) %>
-			<%= link_to t.borrower.username, user_path(t.borrower) %>
-			<% if t.requestReturn == true %>
-				<%= render 'borrow_requests/acceptReturn', :tool => t %>
-			<% end %>
-		<% end %>
-	<% end %>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

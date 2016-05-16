@@ -1,7 +1,44 @@
-<h4><%= @tooltype.name %></h4>
+<div class="container">
 
-<% @tools.each do |t| %>
-	<div class="well">
-		<p><%=link_to t.name, tool_path(t) %></p>
-	</div>
-<% end %>
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><%= @tooltype.name %>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Projects Row -->
+    <div class="row">
+    	<div class="col-md-3">
+		    <p class="lead">Categories</p>
+		    <div class="list-group">
+		    	<a><%= link_to 'All Tools', tools_path(), class:'list-group-item' %></a>
+		    	<% @tooltypes.each do |type| %>
+		        	<a><%= link_to type.name, tooltype_path(type), class:'list-group-item' %></a>
+				<% end %>
+		    </div>
+		</div>
+    	<% @tools.each do |t| %>
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <a><%= link_to image_tag(t.tool_pic.url(:medium), size: "320x205", class: 'img responsive'), tool_path(t) %></a>
+
+            <h3>
+                <a><%= link_to t.name, tool_path(t) %></a>
+            </h3>
+            <small><%= time_ago_in_words(t.created_at) %></small>
+            <p><%= t.description %></p>
+        </div>
+        <% end %>
+    </div>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <%= will_paginate @tools %>
+        </div>
+    </div>
+</div>
+<!-- add paginate -->
+
+
+

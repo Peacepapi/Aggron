@@ -1,22 +1,19 @@
 class CommentsController < ApplicationController
 
-	def new
-	end
-
 	def create 
 		@tool = Tool.find(params[:tool_id])
 
 		@comment = @tool.comments.create(comment_params)
-		@comment.user = User.find_by_id(current_user)
+		@comment.commenter = User.find_by_id(current_user)
 
-		if @comment.save
-			flash[:success] = "Thank you for your comments!"
-			redirect_to tool_path(@tool)
-
-		else
-			flash[:warning] = "Your entries was invalid!"
-			redirect_to tool_path(@tool)
-
+		respond_to do |format|
+			if @comment.save
+				format.html {redirect_to tool_path(@tool)}
+				format.js 
+			else
+				flash[:warning] = "Your entries was invalid!"
+				format.html {redirect_to tool_path(@tool)}
+			end
 		end
 	end
 

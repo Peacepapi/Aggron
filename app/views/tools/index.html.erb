@@ -1,37 +1,40 @@
-<% if logged_in? %>
-	<h2><%= link_to "Create a new tool", new_tool_path %></h2>
-<% end %>
-<%= render 'shared/page_title', title: 'All tools' %>
+<div class="container">
+        <!-- Page Header -->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">All Tools
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
 
+    <!-- Projects Row -->
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Categories</p>
+            <div class="list-group">
+                <a><%= link_to 'All Tools', tools_path(), class:'list-group-item' %></a>
+                <% @tooltypes.each do |type| %>
+                    <a><%= link_to type.name, tooltype_path(type), class:'list-group-item' %></a>
+                <% end %>
+            </div>
+        </div>
+        <% @tools.each do |t| %>
+        <div class="col-sm-4 col-lg-4 col-md-4">
 
-<div class="well">
-	<ul>
-		<% @tooltypes.each do |type| %>
-		<li>
-			<%= link_to type.name, tooltype_path(type) %>
-			<% end %>
-		</li>
-	</ul>
+            <a><%= link_to image_tag(t.tool_pic.url(:medium), size: "320x205", class: 'img responsive'), tool_path(t) %></a>
+
+            <h3>
+                <a><%= link_to t.name, tool_path(t) %></a>
+            </h3>
+            <small><%= time_ago_in_words(t.created_at) %></small>
+            <p><%= t.description %></p>
+        </div>
+        <% end %>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <%= will_paginate %>
+        </div>
+    </div> 
 </div>
-
-
-
-<%= will_paginate %>
-
-<% if !@tools %>
-	<p>There are no tools listed</p>
-<% else %>
-	<% @tools.each do |t| %>
-		<div class="well">
-			<h4><%= link_to t.name, tool_path(t) %></h4>
-			<p>
-				<%= t.description %>
-			</p>
-			<p>
-				<span><%= time_ago_in_words(t.created_at) %></span>
-			</p>
-		</div>
-	<% end %>
-<% end %>
-
-<%= will_paginate %>

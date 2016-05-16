@@ -4,7 +4,7 @@ before_action :require_user, except: [:index, :show, :update]
 before_action :require_same_user, only: [:edit, :update] 	
 
 	def index
-		@tools = Tool.paginate(page: params[:page], per_page: 2)
+		@tools = Tool.paginate(page: params[:page], per_page: 4)
 		@tooltypes = Tooltype.all
 	end
 
@@ -42,7 +42,7 @@ before_action :require_same_user, only: [:edit, :update]
 	private 
 
 		def tool_params
-			params.require(:tool).permit(:name, :description, :tooltype_id)
+			params.require(:tool).permit(:name, :description, :tooltype_id, :tool_pic)
 		end
 
 		def set_tool

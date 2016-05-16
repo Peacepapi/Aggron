@@ -5,6 +5,9 @@ class Tool < ActiveRecord::Base
 	has_many :borrowRequests, :class_name => "BorrowRequest", :foreign_key => "requestedTool_id"
 	has_many :comments
 
+	has_attached_file :tool_pic, styles: { medium: "360x205>",
+											large: "600x400>" }
+  	validates_attachment_content_type :tool_pic, content_type: /\Aimage\/.*\Z/
 
 	validates :owner_id, presence: true
 	validates :tooltype_id, presence: true
