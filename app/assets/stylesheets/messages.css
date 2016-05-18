@@ -34,7 +34,8 @@
 
 .me {
     float: left;   
-    margin: 5px 45px 5px 20px;         
+    margin: 5px 45px 5px 20px; 
+    background-color: #58C9B9;        
 }
 
 .me::before {
@@ -44,7 +45,8 @@
 
 .you {
     float: right;    
-    margin: 5px 20px 5px 45px;         
+    margin: 5px 20px 5px 45px;  
+    background-color: #30A9DE;       
 }
 
 .you::before {
@@ -54,5 +56,10 @@
 
 .user-list {
     background-color: #d44745;
+}
+
+.messages.index{
+    overflow-y: scroll; 
+    max-height: 400px;
 }
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'tools#index'
+
+  root 'pages#home'
 
   namespace :api do
     resources :tools

@@ -1,8 +1,8 @@
-<div class="form-group well">
+<div class="form-group">
 <%= form_for [@conversation, @message], remote: true do |f| %>
 		<ul class="form-style-1">
 			<li>
-				<%= f.text_area :body, placeholder: 'Type a message', class: 'form-control' %>
+				<%= f.text_area :body, placeholder: 'Type a message', rows: "5", class: 'form-control' %>
 			</li>
 			<li>
 				<%= f.text_field :user_id, value: current_user.id, type: "hidden", class: 'form-control' %>

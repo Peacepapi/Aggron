@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
 	validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
 	before_save { self.email = email.downcase }
-	validates :username, presence: true, length: {minimum: 4, maximum: 20}
-  validates :password_confirmation, presence: true
+	validates :username, presence: true, length: {minimum: 5, maximum: 20}
+	validates :password, presence: true, length: {minimum: 7, maximum: 50}
+  	validates :password_confirmation, presence: true
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: {maximum: 254},
                   uniqueness: { case_sensitive: false },
@@ -21,6 +22,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
     def display_name
-    	username.capitalize
+    	self.username.capitalize
     end
 end

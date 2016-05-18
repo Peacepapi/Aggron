@@ -1,30 +1,32 @@
 <%= render 'shared/errors', obj: @tool %>
-<div class="form-group well">
-<%= form_for @tool, html: { multipart: true } do |f| %>
-	<ul class="form-style-1">
-		<li><%= f.label :Upload_a_picture %>
-			<%= f.file_field :tool_pic %>
-			<% if @tool.tool_pic? %>
-				<%= image_tag @tool.tool_pic.url(:medium) %>
-			<% end %>
-		</li>
-		<li>
-			<%= f.label :name %> <span class="required">*</span>
-			<%= f.text_field :name, class: 'form-control' %>
-		</li>
-		<li>
-			<%= f.label :type %>
-			<%= f.collection_select :tooltype_id, Tooltype.all , :id, :name, include_blank: true %>	<span class="required">*</span>
-		</li>
-		<li>
-			<%= f.label :description %> <span class="required">*</span>
-			<%= f.text_area :description, rows: "5", class: "form-control" %>
-		</li>
-		<li>
-			<div class="text-center">
-			<%= f.submit(@tool.new_record? ? 'Create Tool' : 'Edit Tool', class: " btn btn-default")%>
-			</div>	
-		</li>
-	</ul>
-<% end %>
+<div class="tools create wrap">
+	<div class="form-group well">
+	<%= form_for @tool, html: { multipart: true } do |f| %>
+		<ul class="form-style-1">
+			<li><%= f.label :Upload_a_picture %>
+				<%= f.file_field :tool_pic %>
+				<% if @tool.tool_pic? %>
+					<%= image_tag @tool.tool_pic.url(:medium) %>
+				<% end %>
+			</li>
+			<li>
+				<%= f.label :name %> <span class="required">*</span>
+				<%= f.text_field :name, class: 'form-control', required: true  %>
+			</li>
+			<li>
+				<%= f.label :type %>
+				<%= f.collection_select :tooltype_id, Tooltype.all , :id, :name, include_blank: true, required: true  %>	<span class="required">*</span>
+			</li>
+			<li>
+				<%= f.label :description %> <span class="required">*</span>
+				<%= f.text_area :description, rows: "5", class: "form-control", required: true  %>
+			</li>
+			<li>
+				<div class="text-center">
+				<%= f.submit(@tool.new_record? ? 'Create Tool' : 'Edit Tool', class: " btn btn-default")%>
+				</div>	
+			</li>
+		</ul>
+	<% end %>
+	</div>
 </div>

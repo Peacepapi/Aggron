@@ -8,8 +8,15 @@ class BorrowRequestsController < ApplicationController
 		@borrowRequest.requester = User.find(current_user)
 
 		if tool.owner.id == @borrowRequest.requester.id
-			flash[:warning] = "You cannot borrow your own tools"
+			flash[:warning] = "You cannot borrow your own tools."
 			redirect_to tool_path(tool) and return
+		end
+
+		tool.borrowRequests.each do |req|
+			if req.requester == current_user
+				flash[:warning] = "You already sent a request for this tool."
+				redirect_to tool_path(tool) and return
+			end
 		end
 		
 		if @borrowRequest.save

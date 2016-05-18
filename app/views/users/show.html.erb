@@ -1,27 +1,38 @@
-<%= render 'shared/page_title', title: @user.username %>
-
-<% if @user.profile_pic? %>
-	<%= image_tag @user.profile_pic.url(:medium) %>
-<% end %>
-
-<% if logged_in? && @user == current_user %>
-	<h2><%= link_to "Create a new tool", new_tool_path %></h2>
-<% end %>
-
-
-<div class="center">
-	<%= will_paginate @tools %>
-</div>
-<% @tools.each do |t| %>
-	<div class="well">
-			<h4><%= link_to t.name, tool_path(t) %></h4>
-		<p>
-			<%= t.description %>
-		</p>
-		<p>
-			<span>Created: <%= time_ago_in_words(t.created_at) %></span>
-			<span>Updated: <%= time_ago_in_words(t.updated_at) %></span>
-		</p>
+<% title(@user.username) %>
+<div class="row wrap">
+	<%= render 'shared/page_title', title: @user.username %>
+	<div class="col-md-8">
+		<% @tools.each do |t| %>
+			<div class="well">
+				<div class="pic-wrapper text-center">
+					<%= link_to image_tag( t.tool_pic.url(:medium)), tool_path(t) %>
+				</div>
+				<h4><%= link_to t.name, tool_path(t) %></h4>
+				<p><%= t.description %></p>
+				<p>
+					<span>Created: <%= time_ago_in_words(t.created_at) %> ago</span>
+				</p>
+			</div>
+		<% end %>
+		<div class="text-center">
+			<%= will_paginate @tools %>
+		</div>
 	</div>
-<% end %>
+	<div class="col-md-4">
+		<div class="text-center">
+			<% if @user.profile_pic? %>
+				<%= image_tag @user.profile_pic.url(:medium) %>
+			<% end %>
+
+			<% if logged_in? && @user == current_user %>
+				<h2><%= link_to "Create a new tool", new_tool_path %></h2>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+
+
+
+
 

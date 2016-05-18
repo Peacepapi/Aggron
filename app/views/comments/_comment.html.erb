@@ -1,11 +1,8 @@
-<div class="well">
-	<p class="pull-right"><%= @tool.comments.count %> comment(s)</p>
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <%= link_to comment.commenter.username, user_path(comment.commenter) %>
-            <span class="pull-right"><%= time_ago_in_words(comment.created_at) %> ago</span>
-            <p><%= comment.body %></p>
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <%= link_to comment.commenter.username, user_path(comment.commenter) %>
+        <span class="pull-right"><%= time_ago_in_words(comment.created_at) %> ago</span>
+        <p><%= comment.body %></p>
+        <hr>
     </div>
 </div>

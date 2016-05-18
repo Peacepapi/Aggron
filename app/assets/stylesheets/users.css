@@ -1,6 +1,7 @@
 .transaction-status {
 	border-right: 2px solid gray;
 	min-height: 200px;
+    text-align: center;
 }
 
 .transaction-row {
@@ -12,12 +13,14 @@ h4 {
 	margin: auto;
 }
 
-.request-box {
-	border-radius: 25px;
-}
-
 .request-box p {
 	text-align: center;
+}
+
+.request-box {
+    margin-top: 15px;
+    background-color: #000;
+    color: #fff;
 }
 
 /*--------------------FORM---------------------------*/

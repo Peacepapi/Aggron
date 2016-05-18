@@ -1,3 +1,4 @@
+<% title(@tool.name) %>
 <div class="container">
 		<!-- Heading Row -->
 	<div class="row">
@@ -29,18 +30,8 @@
 			    <h4>
 					<% if @tool.borrower != nil %>
 							<p>This tool is unavailable</p>
-					<% elsif  @tool.owner == current_user %>
-							<p>You are the owner of this tool.</p>
 					<% else %>
-						<% if @tool.borrowRequests.present? %>
-							<% @tool.borrowRequests.each do |req| %>
-								<% if req.requester == current_user %>
-									<p>Your request is pending...</p>
-								<% end %>
-							<% end %>
-						<% else %> 
 							<%= render 'borrow_requests/create' %>
-						<% end %>
 					<% end %>
 			    </h4>
 			</div>
@@ -54,7 +45,11 @@
 		<% else %>
 		<%= render 'comments/form' %>
 		<% end %>
-		<%= render @tool.comments.order("created_at desc") %>
+		<div class="well">
+			<p class="pull-right"><%= @tool.comments.count %> comment(s)</p>
+			<hr>
+			<%= render @tool.comments.order("created_at desc") %>
+		</div>
 	</div>
 	<!-- /.row -->
 </div>

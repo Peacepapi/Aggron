@@ -25,20 +25,21 @@ body {
 }
 
 footer {
-    margin: 50px 0;
+    margin: 40px 0;
 }
-.request-box {
-	margin-top: 15px;
-	background-color: #aacfd0;
-}
+
 .btn-default {
-	background-color: #79bd9a;
-}
-.title {
-	background-color: #79bd9a;
+	background-color: #3ac569;
 }
 .footer{
 	position: relative;
 	clear:both;
 	padding-top:20px;
+}
+
+.wrap {
+	min-height: 550px;
+}
+label.error {
+	color: red;
 }

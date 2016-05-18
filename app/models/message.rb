@@ -8,7 +8,7 @@ class Message < ActiveRecord::Base
 	validates :conversation_id, presence: true
 
 	def formatted_time
-		created_at.strftime("%m/%d/%Y at %I:%M:%S %p")
+		created_at.strftime("%-m/%d/%Y at %l:%M%p")
 	end
 
 end
