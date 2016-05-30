@@ -1,5 +1,5 @@
 class BorrowRequestsController < ApplicationController
-
+before_action :require_user
 	def createRequest
 		@borrowRequest = BorrowRequest.new
 		tool = Tool.find(params[:tool_id])
@@ -44,6 +44,10 @@ class BorrowRequestsController < ApplicationController
 
 		tool.borrower = @request.requester
 
+		if tool.borrower != nil 
+			flash[:warning] = "You already lended this tool."
+			redirect_to user_transaction_status_path(user) and return
+		end
 		if tool.save && @request.delete
 			flash[:success] = "You lended #{tool.name} to #{tool.borrower.username}"
 			redirect_to user_transaction_status_path(user)

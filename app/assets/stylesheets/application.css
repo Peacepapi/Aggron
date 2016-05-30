@@ -43,3 +43,7 @@ footer {
 label.error {
 	color: red;
 }
+.comments {
+	max-height: 300px;
+	overflow-y: scroll;
+}

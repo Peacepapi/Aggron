@@ -1,13 +1,11 @@
 $(document).ready(function(){
 	$(".tools.create").ready(function(){
-		console.log('test again');
 		var $new_tool = $('#new_tool');
 		var $edit_tool = $('.edit_tool');
 		getToolValidation($new_tool);
 		getToolValidation($edit_tool);
 	});
 	$(".users.create").ready(function(){
-		console.log('test');
 		var $new_user = $("#new_user");
 		var $edit_user = $(".edit_user");
 		getUserValidation($new_user);
@@ -27,7 +25,6 @@ $(document).ready(function(){
 					minlength: 10,
 					maxlength: 254
 				}
-
 			},
 			messages: {
 				"tool[name]": {
@@ -44,7 +41,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-	function getUserValidation($form_id) {
+	function getUserValidation($form_id) {//passed in a class
 		$form_id.validate({
 			rules: {
 				"user[username]": {

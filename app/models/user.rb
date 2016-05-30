@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	has_many :tools, 			:class_name => "Tool", 			:foreign_key => "owner_id"
 	has_many :borrowedTools,	:class_name => "Tool", 			:foreign_key => "borrower_id"
 	has_many :comments
-
+	has_many :rating, class_name: 'Rating', foreign_key: 'reviewer_id'
  	has_many :conversations, 									:foreign_key => "sender_id"
 
 	has_attached_file :profile_pic, styles: { medium: "200x200>",

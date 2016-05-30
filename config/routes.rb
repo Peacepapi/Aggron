@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :tools do
   	resources :comments
+    post 'rate', to: 'ratings#rate'
     post '/borrow_request', to: 'borrow_requests#createRequest'
   end
  

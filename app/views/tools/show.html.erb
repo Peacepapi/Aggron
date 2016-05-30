@@ -12,6 +12,14 @@
 		<div class="col-md-6">
 		    <div class="thumbnail">
 	            <%= image_tag(@tool.tool_pic.url(:large), size: '533x400', class: 'img responsive')%>
+	            <div class="rating pull-right">
+	            	<%= link_to tool_rate_path(@tool, like: true), method: 'post' do %>
+	            		<%= content_tag :span, "", class: "glyphicon glyphicon-thumbs-up" %>
+	            	<% end %>
+					<%= link_to tool_rate_path(@tool, like: false), method: 'post' do %>
+	            		<%= content_tag :span, "", class: "glyphicon glyphicon-thumbs-down" %>
+	            	<% end %>
+	            </div>
 			</div>   
 		</div>  
 		<div class="col-md-6">
@@ -39,16 +47,20 @@
 		</div>
 
 	</div>
-	<div id="comments">
+	<div>
 		<% if !logged_in? %>
 			<p>Please log in to enter a comment or borrow a tool</p>
 		<% else %>
 		<%= render 'comments/form' %>
 		<% end %>
 		<div class="well">
-			<p class="pull-right"><%= @tool.comments.count %> comment(s)</p>
+			<p class="pull-right count" data-count= <%= @tool.comments.count %>>
+				<%= @tool.comments.count %> comment(s)
+			</p>
 			<hr>
-			<%= render @tool.comments.order("created_at desc") %>
+			<div class="comments">
+				<%= render @tool.comments.order("created_at desc") %>
+			</div>
 		</div>
 	</div>
 	<!-- /.row -->

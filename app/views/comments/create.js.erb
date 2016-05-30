@@ -1,3 +1,9 @@
-$('#comments').prepend('<%= j render @comment %>');
+$('.comments').prepend('<%= j render @comment %>');
 //rails convention give comment_body id to comment's form
+var count = $('.count').data('count');
+console.log(count);
+var count = count + 1;
+$('.count').replaceWith("<p class='pull-right count' data-count=" + count + ">" +
+					count + " comment(s)</p>"
+				);
 $('#comment_body').val("");

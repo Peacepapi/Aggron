@@ -4,6 +4,7 @@ class Tool < ActiveRecord::Base
 	belongs_to :tooltype
 	has_many :borrowRequests, :class_name => "BorrowRequest", :foreign_key => "requestedTool_id"
 	has_many :comments
+	has_many :ratings
 
 	has_attached_file :tool_pic, styles: { medium: "360x205>",
 											large: "600x400>" }
@@ -14,4 +15,12 @@ class Tool < ActiveRecord::Base
 	validates :name, presence: true, length: {minimum: 4, maximum: 100}
 	validates :description, presence: true, length: {minimum: 10, maximum: 254}
 
+
+	def like_counts
+		self.ratings.where(like: true).size
+	end
+
+	def dislike_counts
+		self.ratings.where(like: false).size
+	end
 end
