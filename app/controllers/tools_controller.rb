@@ -4,8 +4,13 @@ before_action :require_user, except: [:index, :show, :update]
 before_action :require_same_user, only: [:edit, :update] 	
 
 	def index
-		@tools = Tool.paginate(page: params[:page], per_page: 4)
 		@tooltypes = Tooltype.all
+
+		if params[:search]
+			@tools = Tool.search(params[:search]).order("created_at DESC").paginate(page: params[:page], per_page: 4)
+		else
+			@tools = Tool.order("created_at DESC").paginate(page: params[:page], per_page: 4)
+		end
 	end
 
 	def show
@@ -40,7 +45,6 @@ before_action :require_same_user, only: [:edit, :update]
 	end
 
 	private 
-
 		def tool_params
 			params.require(:tool).permit(:name, :description, :tooltype_id, :tool_pic)
 		end

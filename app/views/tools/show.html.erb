@@ -16,9 +16,11 @@
 	            	<%= link_to tool_rate_path(@tool, like: true), method: 'post' do %>
 	            		<%= content_tag :span, "", class: "glyphicon glyphicon-thumbs-up" %>
 	            	<% end %>
+	            	<%= @tool.like_counts %>
 					<%= link_to tool_rate_path(@tool, like: false), method: 'post' do %>
 	            		<%= content_tag :span, "", class: "glyphicon glyphicon-thumbs-down" %>
 	            	<% end %>
+	            	<%= @tool.dislike_counts %>
 	            </div>
 			</div>   
 		</div>  

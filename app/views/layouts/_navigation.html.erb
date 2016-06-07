@@ -10,7 +10,14 @@
                 </button>
 				<%= link_to "Tooldaloo", root_path, class: "navbar-brand" %>
 			</div>
+			<div class="navbar-left">
+				<%= form_tag tools_path, :method => 'get', class:"pull-right"  do %>
+   					<%= text_field_tag :search, params[:search], placeholder: "Search"%>
+   					<%= submit_tag "Search", class:"btn btn-default", :name => nil  %>
+ 				<% end %>
+			</div>
 			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
 				<% if !logged_in? %>
 					<%= link_to 'Log in', login_path ,class: "btn btn-default" %>
 					<%= link_to 'Sign Up', signup_path ,class: "btn btn-default" %>

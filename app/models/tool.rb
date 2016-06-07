@@ -23,4 +23,8 @@ class Tool < ActiveRecord::Base
 	def dislike_counts
 		self.ratings.where(like: false).size
 	end
+
+	def self.search(search)
+		where("lower(name) LIKE ?", "%#{search.downcase}%")
+	end
 end

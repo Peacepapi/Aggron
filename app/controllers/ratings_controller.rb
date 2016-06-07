@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
 	before_action :set_tool, only: :rate
-	before_action :require_same_user, only: :rate
+	before_action :require_user, only: :rate
 	def new
 		@rating = Rating.new
 	end
